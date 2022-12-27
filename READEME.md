@@ -4,6 +4,9 @@
 
 학습 주제별로 브랜치를 나눠 수업을 진행합니다. 해당 학습 자료는 해당 프렌치로 이동 후 확인 가능합니다
 
+- [ ] Code Structure
+- [ ] Code Structure
+
 [범쌤의 학습자료](https://www.notion.so/UI-7ec855795bfd4ef1a8a8f17a7c46f8d8)
 
 ---
@@ -23,3 +26,5 @@
 `npm init @eslint/config` 👉 eslint config 생성(CommonJS : node)
 
 `npx add-gitignore` 👉 gitignore 파일 생성
+
+## 코드 구조
