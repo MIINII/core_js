@@ -23,4 +23,3 @@
 `npm init @eslint/config` 👉 eslint config 생성(CommonJS : node)
 
 `npx add-gitignore` 👉 gitignore 파일 생성
-성
