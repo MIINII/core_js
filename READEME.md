@@ -27,4 +27,7 @@
 
 `npx add-gitignore` 👉 gitignore 파일 생성
 
-## 코드 구조
+## 변수
+
+### eslint 설정
+
