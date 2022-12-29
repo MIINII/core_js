@@ -74,5 +74,8 @@ console.log(number);
 
 let count = 10;
 let total = (count % 4) * (count /= 2) + count ** 3; // 135
-console.log('🚀 ⁝ total', total)
+console.log('🚀 ⁝ total', total);
+console.log(total);
 // 2 * 5 + (5**3) => 10 + 125
+
+console.log(true === 1);
