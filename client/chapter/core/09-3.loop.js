@@ -1,70 +1,58 @@
 /* ---------------------------------------------------------------------- */
-/* Do While Loop                                                          */
+/* For Loop                                                               */
 /* ---------------------------------------------------------------------- */
 
-// let i = 10;
+/* 
+let i = 0
 
-// do{
-
-//   console.log('최초 선언');
-
-//   i++;
-
-// }while(false)
-
-// do ~ while 문 (역순환)
-
-// - prompt 창을 띄워 사용자로 하여금 순환 횟수를 요청
-// - 사용자로부터 요청된 횟수 만큼 역방향으로 순환 출력
-// - 사용자로부터 요청된 횟수가 0보다 작을 경우,
-//   '최초 실행된 메시지입니다. 이 메시지는 조건이 거짓이어도 볼 수 있습니다.' 출력
-// - 순환 중단
-
-/* let count = prompt('몇 번 순환할까요?','');
-
-do{
-  
- 
-
-  if(count <= 0 || !count ){
-    console.log('최초실행');
-    break;
-  }
-
-  count--;
-  console.log(count);
-
-}while(count)
-
-
+while(i < 10){
+  i++
+}
  */
 
-// do ~ while 문 (순환)
-// - 위 do ~ while 문을 순방향으로 순환되도록 설정
+// for(let j = 0; j < 10; j++){
 
-//  블록 스코프
+//   console.log(i)
 
-// console.log(x);
+// }
 
-let first = document.querySelector('.first');
-let second = document.querySelector('.second');
+// 2 ~ 10까지의 짝수 출력하기
 
-function next(node) {
-  do {
-    node = node.nextSibling;
-  } while (node.nodeType !== document.ELEMENT_NODE);
+for (let j = 1; j <= 10; j++) {
+  if (j % 2 !== 0) continue;
 
-  return node;
+  // console.log(j);
 }
 
-// next(first) // second
+const frontEndDev = 'HTML CSS SVG JavaScript jQuery React Redux'.split(' ');
 
-// prev(second)   // first
+// let i = 0;
+// let l = frontEndDev.length;
 
-function prev(node) {
-  do {
-    node = node.previousSibling;
-  } while (node.nodeType !== document.ELEMENT_NODE);
+// while(i < l) {
+//   // console.log(frontEndDev[i]);
+//   i += 1;
+// }
 
-  return node;
+//   - 조건이 맞을 경우, 이어서(continue) 순환
+//   - 조건: SVG, jQuery는 출력하지 마세요.
+
+//   - 조건이 맞을 경우, 순환 중단(break)
+//   - 조건: JavaScript 까지만 출력하세요.
+
+for (let i = 0; i < frontEndDev.length; i++) {
+  let result = frontEndDev[i];
+
+  // if(result.includes('SVG') || result.includes('jQuery')) continue;
+
+  if (result.includes('jQuery')) break;
+
+  console.log(result);
 }
+
+// while 문 → for 문 (순환)
+// - 실행 흐름
+// - 순환 중단 또는 이어서 순환
+
+//   - 무한 루프 (브레이크)
+//   - for 문 (역순환)
