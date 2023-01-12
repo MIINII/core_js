@@ -40,13 +40,22 @@ span.is-active {
   transform: translate(-50%, -50%);
 }
 
-
 .ball {
-  transition: all .3s;
+  transition: all 0.3s;
   pointer-events: none;
 }
 
+.visual {
+  padding: 1.5rem;
+  background-color: dodgerblue;
+}
 
-.emotion {
-  
+.news {
+  padding: 1rem;
+  background-color: orange;
+}
+
+.desc {
+  padding: 1rem;
+  background-color: hotpink;
 }
