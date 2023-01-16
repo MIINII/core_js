@@ -45,12 +45,12 @@ const toggleClass = (node, className) => {
 
 // 자바스크립트에선 객체의 key, value 가ㅣㅄ을 변수로 받기위해서는 . 사용 X
 // [ ] 각괄호 표기법
-const getCss = (node, prop) => {
+const getCss = (node, poatato) => {
   if (typeof node === 'string') {
     node = getNode(node);
   }
 
-  if (!prop in document.body.style) {
+  if (!poatato in document.body.style) {
     syntaxError('getCSS 함수의 두번쨰 인자인 prop은 유효한 css 속성이 아닙니다.');
   }
   return getComputedStyle(node)[prop];
@@ -60,7 +60,7 @@ const setCss = (node, prop, value) => {
   if (typeof node === 'string') {
     node = getNode(node);
   }
-  if (!prop in document.body.style) {
+  if (!poatato in document.body.style) {
     syntaxError('setCss 함수의 두번쨰 인자인 prop은 유효한 css 속성이 아닙니다.');
   }
   if (!value) {
