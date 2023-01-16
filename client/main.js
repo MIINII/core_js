@@ -8,7 +8,7 @@ import {
   addClass,
   removeClass,
   copy,
-} from './lib/index.js';
+} from './lib/dom/index.js';
 
 import { jujeobData } from './data/data.js';
 
@@ -25,6 +25,15 @@ function clickSubmitHandler(e) {
   if (!name) {
     console.log('이름을 입력해 주세요!');
     showAlert('.alert-error', '잘못된 정보입니다.!', 2000);
+
+    // GSAP
+    gsap.fromTo(resultArea, 0.01, { x: -5 }, { x: 5, clearProps: 'x', repeat: 20 });
+
+    addClass(resultArea, 'shake');
+    setTimeout(() => {
+      removeClass(resultArea, 'shake');
+    }, 1000);
+
     return;
   }
 
@@ -37,15 +46,14 @@ function clickSubmitHandler(e) {
   insertLast(resultArea, pick);
 }
 
-const clickCopyHandler = () => {
+function clickCopyHandler() {
   let text = resultArea.textContent;
   // navigator.clipboard.writeText(text);
   copy(text).then(() => {
     showAlert('.alert-success', '클립보드 복사가 완료됐습니다.', 2000);
   });
   // 약속구문
-  
-};
+}
 
 submit.addEventListener('click', clickSubmitHandler);
 resultArea.addEventListener('click', clickCopyHandler);

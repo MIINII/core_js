@@ -1,4 +1,4 @@
-const addClass = (node, className) => {
+export const addClass = (node, className) => {
   if (typeof node === 'string') {
     node = getNode(node);
   }
@@ -11,7 +11,7 @@ const addClass = (node, className) => {
 };
 
 // 변경하기 : 대상의 클래스를 지운다
-const removeClass = (node, className) => {
+export const removeClass = (node, className) => {
   if (typeof node === 'string') node = getNode(node);
 
   if (!className) {
@@ -27,7 +27,7 @@ const removeClass = (node, className) => {
 };
 
 // x토글 : 클래스 껐켯
-const toggleClass = (node, className) => {
+export const toggleClass = (node, className) => {
   if (typeof node === 'string') node = getNode(node);
 
   if (typeof className !== 'string') {
@@ -45,39 +45,32 @@ const toggleClass = (node, className) => {
 
 // 자바스크립트에선 객체의 key, value 가ㅣㅄ을 변수로 받기위해서는 . 사용 X
 // [ ] 각괄호 표기법
-const getCss = (node, poatato) => {
+function getCss(node, prop) {
   if (typeof node === 'string') {
     node = getNode(node);
   }
 
-  if (!poatato in document.body.style) {
-    syntaxError('getCSS 함수의 두번쨰 인자인 prop은 유효한 css 속성이 아닙니다.');
+  if (!(prop in document.body.style)) {
+    syntaxError('getCSS 함수의 두 번째 인자인 prop은 유효한 css 속성이 아닙니다.');
   }
   return getComputedStyle(node)[prop];
-};
+}
 
-const setCss = (node, prop, value) => {
+function setCss(node, prop, value) {
   if (typeof node === 'string') {
     node = getNode(node);
   }
-  if (!poatato in document.body.style) {
-    syntaxError('setCss 함수의 두번쨰 인자인 prop은 유효한 css 속성이 아닙니다.');
+  if (!(prop in document.body.style)) {
+    syntaxError('setCSS 함수의 두 번째 인자인 prop은 유효한 css 속성이 아닙니다.');
   }
   if (!value) {
-    syntaxError('setCss 함수의 세번재 인자는 필수입다');
+    syntaxError('setCSS 함수의 세 번째 인자는 필수값 입니다.');
   }
+}
 
-  node.style[prop] = value;
-};
-
-const css = (node, prop, value) => {
-  // if (!value) {
-  //   getCss(node, prop);
-  // } else {
-  //   setCss(node, prop, value);
-  // }
+export const css = (node, prop, value) => {
   return !value ? getCss(node, prop) : setCss(node, prop, value);
 };
 
-css('.first', 'font-size', '100px'); // set
-css('.first', 'font-size'); // get
+// css('.first', 'font-size', '100px'); // set
+// css('.first', 'font-size'); // get
