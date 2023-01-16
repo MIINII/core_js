@@ -7,6 +7,7 @@ import {
   isNumericString,
   addClass,
   removeClass,
+  copy,
 } from './lib/index.js';
 
 import { jujeobData } from './data/data.js';
@@ -38,7 +39,13 @@ function clickSubmitHandler(e) {
 
 const clickCopyHandler = () => {
   let text = resultArea.textContent;
-  navigator.clipboard.writeText(text);
+  // navigator.clipboard.writeText(text);
+  copy(text).then(() => {
+    showAlert('.alert-success', '클립보드 복사가 완료됐습니다.', 2000);
+  });
+  // 약속구문
+  
 };
 
 submit.addEventListener('click', clickSubmitHandler);
+resultArea.addEventListener('click', clickCopyHandler);

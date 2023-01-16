@@ -14,7 +14,7 @@ function insertFirst(node, text) {
   node.insertAdjacentHTML('afterbegin', text);
 }
 
-function insertLast(node, text) {
+function insertLast(node, text) {w
   if (typeof node === 'string') node = getNode(node);
   if (node.nodeType !== document.ELEMENT_NODE) {
     refError('insertLast 함수의 첫 번째 인자는 ELEMENT 노드여야 합니다.');
