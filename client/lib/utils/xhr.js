@@ -8,7 +8,7 @@
 
 // 재사용 가능한 함수로 만들어보기 method, url
 // 얘도 파라미터에 구조분해 할당
-const xhrData = ({
+export const xhrData = ({
   url = '',
   method = 'GET',
   body = null,
@@ -103,12 +103,12 @@ xhrData.delete = (url, onSuccess, onFail) => {
 
 
 
-xhrData.get(
-  'https://jsonplaceholder.typicode.com/users/1',
-  (res) => {
-    console.log(res);
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+// xhrData.get(
+//   'https://jsonplaceholder.typicode.com/users/1',
+//   (res) => {
+//     console.log(res);
+//   },
+//   (err) => {
+//     console.log(err);
+//   }
+// );
