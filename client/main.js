@@ -1,1 +1,1 @@
-console.log('hi')
+import {} from './lib/index.js';
