@@ -6,7 +6,7 @@
   4: complete // 완료
 */
 
-import { typeError } from '../error/typeError';
+import { typeError } from '../error/typeError.js';
 
 // 재사용 가능한 함수로 만들어보기 method, url
 // 얘도 파라미터에 구조분해 할당
@@ -104,17 +104,17 @@ const defaultOptions = {
   body: null,
 };
 
-const xhrPromise = (options = {}) => {
+export const xhrPromise = (options = {}) => {
   const xhr = new XMLHttpRequest();
 
-  const { method, url, body, headers } = Object.assign({}.defaultOptions, options);
+  const { method, url, body, headers } = Object.assign({}, defaultOptions, options);
 
-  if (!url) typeError('서버와 통신할 url 인자는 반드시 필요합니다');
+  if (!url) typeError('서버와 통신할 url 인자는 반드시 필요합니다.');
 
   xhr.open(method, url);
+
   xhr.send(body ? JSON.stringify(body) : null);
 
-  // 실행자 : 익스이큐터
   return new Promise((resolve, reject) => {
     xhr.addEventListener('readystatechange', () => {
       const { status, readyState, response } = xhr;
@@ -124,16 +124,15 @@ const xhrPromise = (options = {}) => {
           resolve(JSON.parse(response));
         }
       } else {
-        reject('ㅇㄹ');
+        reject('에러입니다.');
       }
     });
   });
 };
 
-xhrPromise.get = (url, body) => {
+xhrPromise.get = (url) => {
   return xhrPromise({
     url,
-    body,
   });
 };
 
@@ -144,6 +143,7 @@ xhrPromise.post = (url, body) => {
     method: 'POST',
   });
 };
+
 xhrPromise.put = (url, body) => {
   return xhrPromise({
     url,
@@ -151,18 +151,10 @@ xhrPromise.put = (url, body) => {
     method: 'PUT',
   });
 };
-xhrPromise.delete = (url, body) => {
+
+xhrPromise.delete = (url) => {
   return xhrPromise({
     url,
     method: 'DELETE',
   });
 };
-
-// xhrPromise
-//   .get('www.naver.com') // promise가 남음
-//   .then((res) => {
-//     console.log(res);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
