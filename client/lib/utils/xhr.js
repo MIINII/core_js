@@ -6,6 +6,8 @@
   4: complete // 완료
 */
 
+import { typeError } from '../error/typeError';
+
 // 재사용 가능한 함수로 만들어보기 method, url
 // 얘도 파라미터에 구조분해 할당
 export const xhrData = ({
@@ -52,22 +54,10 @@ export const xhrData = ({
   xhr.send(JSON.stringify(body)); // 보낼때는 문자형식으로 보내줘야함~
 };
 
-/* xhrData({
-  url: 'https://jsonplaceholder.typicode.com/users/1',
-  onSuccess: (result) => {
-    console.log(result);
-  },
-  onFail: (err) => {
-    console.log(err);
-  },
-});
-*/
-
-
 // #######################################
-// xhrData에 메서드 추가해보기     #######
+// xhrData에 메서드 추가해보기        #######
 // #######################################
-xhrData.get = (url, onSuccess, onFail) => {
+/* xhrData.get = (url, onSuccess, onFail) => {
   xhrData({
     url,
     onSuccess,
@@ -77,7 +67,7 @@ xhrData.get = (url, onSuccess, onFail) => {
 
 xhrData.post = (url, onSuccess, onFail) => {
   xhrData({
-    method:'POST',
+    method: 'POST',
     url,
     onSuccess,
     onFail,
@@ -86,7 +76,7 @@ xhrData.post = (url, onSuccess, onFail) => {
 
 xhrData.put = (url, onSuccess, onFail) => {
   xhrData({
-    method:'PUT',
+    method: 'PUT',
     url,
     onSuccess,
     onFail,
@@ -95,20 +85,84 @@ xhrData.put = (url, onSuccess, onFail) => {
 
 xhrData.delete = (url, onSuccess, onFail) => {
   xhrData({
-    method:'DELETE',
+    method: 'DELETE',
     onSuccess,
     onFail,
   });
 };
+*/
 
+// 프라미스 방식으로 바까보기 ㅋ
 
+const defaultOptions = {
+  url: '',
+  method: 'GET',
+  headers: {
+    'Content-Type': 'applictaion/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+  body: null,
+};
 
-// xhrData.get(
-//   'https://jsonplaceholder.typicode.com/users/1',
-//   (res) => {
+const xhrPromise = (options = {}) => {
+  const xhr = new XMLHttpRequest();
+
+  const { method, url, body, headers } = Object.assign({}.defaultOptions, options);
+
+  if (!url) typeError('서버와 통신할 url 인자는 반드시 필요합니다');
+
+  xhr.open(method, url);
+  xhr.send(body ? JSON.stringify(body) : null);
+
+  // 실행자 : 익스이큐터
+  return new Promise((resolve, reject) => {
+    xhr.addEventListener('readystatechange', () => {
+      const { status, readyState, response } = xhr;
+
+      if (status >= 200 && status < 400) {
+        if (readyState === 4) {
+          resolve(JSON.parse(response));
+        }
+      } else {
+        reject('ㅇㄹ');
+      }
+    });
+  });
+};
+
+xhrPromise.get = (url, body) => {
+  return xhrPromise({
+    url,
+    body,
+  });
+};
+
+xhrPromise.post = (url, body) => {
+  return xhrPromise({
+    url,
+    body,
+    method: 'POST',
+  });
+};
+xhrPromise.put = (url, body) => {
+  return xhrPromise({
+    url,
+    body,
+    method: 'PUT',
+  });
+};
+xhrPromise.delete = (url, body) => {
+  return xhrPromise({
+    url,
+    method: 'DELETE',
+  });
+};
+
+// xhrPromise
+//   .get('www.naver.com') // promise가 남음
+//   .then((res) => {
 //     console.log(res);
-//   },
-//   (err) => {
+//   })
+//   .catch((err) => {
 //     console.log(err);
-//   }
-// );
+//   });
