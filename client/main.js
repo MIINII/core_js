@@ -1,5 +1,14 @@
 /*global gsap */
-import { miinii, renderUserCard, renderSpinner, renderEmpty, getNode as $, changeColor, delayP } from './lib/index.js';
+import {
+  miinii,
+  renderUserCard,
+  renderSpinner,
+  renderEmpty,
+  getNode as $,
+  changeColor,
+  delayP,
+  attr,
+} from './lib/index.js';
 
 /* xhrData.get(
   'https://jsonplaceholder.typicode.com/users/1',
@@ -40,11 +49,11 @@ const renderUserList = async () => {
   renderSpinner(userCardContainer);
 
   try {
-    await delayP(3000);
+    await delayP(1000);
 
     $('.loadingSpinner').remove();
 
-    let response = await miinii.get('https://jsonplaceholder.typicode.com/users/');
+    let response = await miinii.get('http://localhost:3000/users');
 
     let userData = response.data;
     console.log('🚀 ⁝ renderUserList ⁝ userData', userData);
@@ -72,3 +81,23 @@ const renderUserList = async () => {
 };
 
 renderUserList();
+
+const deleteHandler = (e) => {
+  // closest 부모를 찾아서 올라감
+  let deleteButton = e.target.closest('button'); // 이벤트 위임 : 누른대상에서 가장 인접한 버튼만 찾아라
+  let article = e.target.closest('article'); // 아티클에 있는 id를 조회하여 삭제하기 위해서
+
+  if (!deleteButton || !article) return; // 다른동작을 햇을떄 아무일도 일어나지 않게 하기 위해서
+
+  let id = attr(article, 'data-index').slice(5);
+
+  console.log('🚀 ⁝ deleteHandler ⁝ id', id);
+
+  miinii.delete(`http://localhost:3000/users/${id}`).then(() => {
+    userCardContainer.innerHTML = '';
+    renderUserList();
+  });
+};
+
+// 삭제버튼을 누르면 콘솔창에 '삭제' 글자가 출력이 될 수 있도록 만들어 주세요
+userCardContainer.addEventListener('click', deleteHandler);
