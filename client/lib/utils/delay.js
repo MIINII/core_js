@@ -1,6 +1,5 @@
 import { getNode } from '../dom/getNode.js';
 import { isNumber, isObject } from './typeOf.js';
-import { delayP } from './delay';
 
 const first = getNode('.first');
 
@@ -27,23 +26,23 @@ const defaultOptions = {
 };
 
 // 콜백의 가독성을 위해서 프라미스 사용
-// export const delayP = (option = {}) => {
-//   // defaultOptions
-//   let config = { ...defaultOptions }; // 01. 컨피그에 디폴트 옵션 전달
+export const delayP = (option = {}) => {
+  // defaultOptions
+  let config = { ...defaultOptions }; // 01. 컨피그에 디폴트 옵션 전달
 
-//   // 객체 합성 mixin = 기존의값 + 옵션으로 전달한 값
-//   if (isObject(option)) {
-//     config = { ...config, ...option };
-//   }
+  // 객체 합성 mixin = 기존의값 + 옵션으로 전달한 값
+  if (isObject(option)) {
+    config = { ...config, ...option };
+  }
 
-//   const { shouldReject, data, errorMsg, timeout } = config;
+  const { shouldReject, data, errorMsg, timeout } = config;
 
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       !shouldReject ? resolve(data) : reject(errorMsg);
-//     }, timeout);
-//   });
-// };
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      !shouldReject ? resolve(data) : reject(errorMsg);
+    }, timeout);
+  });
+};
 
 // delayP(3000).then((res) => {
 //   console.log(res);
@@ -85,4 +84,4 @@ async function 라면끓이기() {
   }
 }
 
-라면끓이기();
+// 라면끓이기();
